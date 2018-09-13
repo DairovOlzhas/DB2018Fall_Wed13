@@ -1,0 +1,41 @@
+CREATE DATABASE lab1;
+
+CREATE TABLE users (
+  id SERIAL,
+  firstname VARCHAR(50),
+  lastname VARCHAR(50)
+  );
+
+  ALTER TABLE users
+      ADD COLUMN isadmin INTEGER;
+
+SELECT * FROM users;
+
+INSERT INTO users (firstname, lastname, isadmin) VALUES ('Asan', 'Shakabayev', 0);
+
+ALTER TABLE users
+    ALTER isadmin TYPE bool
+USING
+    CASE
+        WHEN isadmin=0 THEN FALSE
+        ELSE TRUE
+    END;
+
+ALTER TABLE users
+    ALTER COLUMN isadmin SET DEFAULT FALSE ;
+
+ALTER TABLE users
+     ADD CONSTRAINT cons PRIMARY KEY(id);
+
+CREATE TABLE tasks (
+  id SERIAL,
+  name VARCHAR(50),
+  user_id INTEGER
+);
+
+DROP TABLE tasks CASCADE;
+
+DROP DATABASE lab1;
+
+
+
